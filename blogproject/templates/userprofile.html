@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block body_block %}
+<!-- Header Close --> 
+<section class="page-title bg-1">
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="block text-center">
+			<h1 class="text-capitalize mb-4 text-lg">User Profile</h1>
+			<ul class="list-inline">
+			  <li class="list-inline-item"><a href="{% url 'blog_app:blogs' %}" class="text-white">Home</a></li>
+			  <li class="list-inline-item"><span class="text-white">/</span></li>
+			  <li class="list-inline-item"><a href="#" class="text-white-50">UserProfile</a></li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+  <!-- contact form start -->
+  <section class="contact-form-wrap section">
+	  <div class="container">
+		  <div class="row">
+            
+			{% if user.is_authenticated %}
+			  <div class="col-lg-6 col-md-12 col-sm-12">
+                    <form enctype="multipart/form-data"id="contact-form" class="contact__form" method="POST">
+						<center>
+							<h3 class="text-md mb-4">
+								{% if user.is_authenticated %}
+								Hey {{ user.username|upper }} !
+								{% endif %}
+							</h3>
+					</center>
+					  <div class="form-group">
+                        <center> 
+							{% if user_profile.profile_pic %}
+							<img  class="img-profile-pic" src="{{ user_profile.profile_pic.url }}" alt="Profile Picture">
+							{% else %}
+							<p>No profile picture available.</p>
+							{% endif %}		
+						</center>  
+                      </div>
+					  <div class="form-group">
+                        <label>Username</label>
+                        <input class="form-control" type="text" value="{{user.username}}" disabled>
+					  </div>
+					  <div class="form-group">
+                        <label>Email</label>
+                        <input class="form-control" type="text" value="{{user.email}}" disabled>		  
+                      </div>
+                      <div class="form-group">
+                        <label>Social Handle</label>
+						<input class="form-control" type="text" value="{{ user_profile.social_handle }}" disabled>			  
+                      </div>
+					  <div class="form-group">
+                        <label>Profession</label>
+						<input class="form-control" type="text" value="{{ user_profile.profession }}" disabled>			  
+                      </div>
+					  <div class="form-group">
+                        <label>Bio</label>
+						<input class="form-control" type="text" value="{{ user_profile.profile_bio }}" disabled>			  
+                      </div>
+				  </form>
+			  </div>
+            {% endif %}
+			  <div class="col-lg-5 col-sm-12">
+				  <div class="contact-content pl-lg-5 mt-5 mt-lg-0">
+					  <span class="text-muted">BlogApp</span>
+					  <h2 class="mb-5 mt-2">Don’t Hesitate to experience our blogApp</h2>
+  
+					  <ul class="address-block list-unstyled">
+						  <li>
+							  <i class="ti-direction mr-3"></i>Infobeans technologies 
+						  </li>
+						  <li>
+							  <i class="ti-email mr-3"></i>Email: sharad.gupta@infobreans.com
+						  </li>
+					  </ul>
+  
+					  <ul class="social-icons list-inline mt-5">
+						  <li class="list-inline-item">
+							  <a href="http://www.themefisher.com"><i class="fab fa-facebook-f"></i></a>
+						  </li>
+						  <li class="list-inline-item">
+							  <a href="http://www.themefisher.com"><i class="fab fa-twitter"></i></a>
+						  </li>
+						  <li class="list-inline-item">
+							  <a href="http://www.themefisher.com"><i class="fab fa-linkedin-in"></i></a>
+						  </li>
+					  </ul>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+  </section>
+  {% endblock %}

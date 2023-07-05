@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% load static %}
+
+    {% block body_block %}
+<!-- Header Close --> 
+<section class="page-title bg-1">
+	<div class="container">
+	  <div class="row">
+		<div class="col-md-12">
+		  <div class="block text-center">
+			<h1 class="text-capitalize mb-4 text-lg">Login Yourself</h1>
+			<ul class="list-inline">
+			  <li class="list-inline-item"><a href="{% url 'blog_app:blogs' %}" class="text-white">Home</a></li>
+			  <li class="list-inline-item"><span class="text-white">/</span></li>
+			  <li class="list-inline-item"><a href="#" class="text-white-50">Login</a></li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+  </section>
+  <!-- contact form start -->
+  <section class="contact-form-wrap section">
+	  <div class="container">
+		  <div class="row">
+            {% if registered %}
+            <div class="col-lg-6 col-md-12 col-sm-12">
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-success contact__msg" style="display: none" role="alert">
+                        You are already Login
+                    </div>
+                </div>
+            </div>
+            </div>
+            {% else %}
+			  <div class="col-lg-6 col-md-12 col-sm-12">
+						<form action="{% url 'blog_app:login' %}" method="POST">
+							{% csrf_token %}
+				   <!-- form message -->
+					  <div class="row">
+						  <div class="col-12">
+							  <div class="alert alert-danger contact__msg" {% if not messages %} style="display:none" {% endif %} role="alert">
+								  {% if messages %}
+									<ul class="messages">
+										{% for message in messages %}
+											<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+										{% endfor %}
+									</ul>
+								{% endif %}
+							  </div>
+						  </div>
+					  </div>
+					  <!-- end message -->
+					  <h3 class="text-md mb-4">Login Form</h3>
+
+                      <div class="form-group">
+						<input name="username" type="text" class="form-control" placeholder="Enter Your Username">
+					</div>
+					<div class="form-group">
+						<input name="password" type="password" class="form-control" placeholder="Enter Your Password">
+					</div>
+					<input class="btn btn-main" name="submit" type="submit" value="Login">					  
+				  </form>
+			  </div>
+            {% endif %}
+			  <div class="col-lg-5 col-sm-12">
+				  <div class="contact-content pl-lg-5 mt-5 mt-lg-0">
+					  <span class="text-muted">We are Professionals</span>
+					  <h2 class="mb-5 mt-2">Don’t Hesitate to contact with us for any kind of information</h2>
+  
+					  <ul class="address-block list-unstyled">
+						  <li>
+							  <i class="ti-direction mr-3"></i>North Main Street,Brooklyn Australia
+						  </li>
+						  <li>
+							  <i class="ti-email mr-3"></i>Email: contact@mail.com
+						  </li>
+						  <li>
+							  <i class="ti-mobile mr-3"></i>Phone:+88 01672 506 744
+						  </li>
+					  </ul>
+  
+					  <ul class="social-icons list-inline mt-5">
+						  <li class="list-inline-item">
+							  <a href="http://www.themefisher.com"><i class="fab fa-facebook-f"></i></a>
+						  </li>
+						  <li class="list-inline-item">
+							  <a href="http://www.themefisher.com"><i class="fab fa-twitter"></i></a>
+						  </li>
+						  <li class="list-inline-item">
+							  <a href="http://www.themefisher.com"><i class="fab fa-linkedin-in"></i></a>
+						  </li>
+					  </ul>
+				  </div>
+			  </div>
+		  </div>
+	  </div>
+  </section>
+  {% endblock %}
