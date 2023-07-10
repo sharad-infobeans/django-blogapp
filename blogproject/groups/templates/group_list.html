@@ -1,0 +1,41 @@
+{% extends "group_base.html" %}
+
+{% load static %}
+
+{% block group_content %}
+    <div class="main-wrapper ">
+        <!-- section portfolio start -->
+        <section class="section portfolio pb-0">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-7 text-center">
+                        <div class="section-title">
+                            <span class="h6 text-color">Groups</span>
+                            <h2 class="mt-3 content-title ">Discover Our Thrilling Groups</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+            <div class="container-fluid">
+                <div class="row portfolio-gallery">
+                    {% for our_group in group_list %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="portflio-item position-relative mb-4">
+                            {% if our_group.group_image %} <a href="{% url 'groups:single' slug=our_group.slug %}">{% endif %}
+                                <img src="{{our_group.group_image.url}}" alt="" class="img-fluid w-100">
+        
+                                <h3 class="mb-0 text-white overlay-item">{{our_group.name}}</h3>
+                                <div class="portfolio-item-content">
+                                   
+                                    <p class="text-white">{{our_group.description|truncatewords:15|striptags|linebreaksbr}}</p>
+                                </div>
+                                {% if our_group.group_image %} </a>{% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+   
+                </div>
+            </div>
+        </section>
+{% endblock %}

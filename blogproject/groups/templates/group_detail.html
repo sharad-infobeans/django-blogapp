@@ -1,0 +1,88 @@
+{% extends "group_base.html" %}
+
+{% load static %}
+
+{% block group_content %}
+
+    <!-- Header Close --> 
+    <!--  Section Services Start -->
+    <section class="section service border-top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 text-center">
+                    <div class="section-title">
+                        <span class="h3 text-color">{{group_details.name|upper}}</span>
+                        <h2 class="mt-3 content-title ">{{group_details.description|truncatewords:15|striptags|linebreaksbr}}</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- form message -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="alert alert-success contact__msg" {% if not messages %} style="display:none" {% endif %} role="alert">
+                        {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- end message -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8" style="border-right: 2px solid #d5253794;">
+                    <h6>Total Members: {{ group_details.members.count}}</h6>
+               
+                    {% for post in group_details.posts.all %}
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 25px;">
+                        <div class="service-item mb-5">
+                            <i class="ti-bookmark"></i>
+                            <h6 class="mb-3">{{ post.message_html|safe }} </h6>
+                
+                            <p class="media-heading" style="float: right;">
+                                <span class="username"><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
+                                 <time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
+                                {% if post.group %}
+                                <span class="group-name">in <a href="{% url 'groups:single' slug=post.group.slug %}"><b>{{ post.group.name }}</b></a></span>
+                                {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <div class="col-lg-4">
+
+                    {% if user in group_details.members.all %}
+
+                    <div class="mb-3"> <h5>Hey {{user}} You Wanna -</h5></div>
+                    <div class="mb-4 mb-4-flex-content-block">
+                        <h6><i class="ti-angle-double-right"></i>  Leave This Group?</h6><a  href="{% url 'groups:leave' slug=group_details.slug %}" class="btn custom-btn-css  btn-lg btn-fill btn-danger"><span class="glyphicon glyphicon-remove-circle"></span> YES</a>
+                    
+                    </div>
+                    <div class="mb-4">
+                         <h6><i class="ti-angle-double-right"></i> Post Your Thrilling Ideas In Group?</h6><a  href="{% url 'posts:create' %}" class="btn custom-btn-css  btn-lg btn-fill btn-info"><span class="glyphicon glyphicon-remove-circle"></span> YES</a>
+                    </div>
+                    {% else %}
+                    <div class="mb-3"> <h5>Hey You Wanna - </h5></div>
+                    <div class="mb-4 mb-4-flex-content-block">
+                        <h6><i class="ti-angle-double-right"></i>  Join This group?</h6> <a href ="{% url 'groups:join' slug=group_details.slug %}" class="btn custom-btn-css  btn-lg btn-fill btn-warning"><span class="glyphicon glyphicon-ok-circle"></span>  YES Go AHEAD!</a>
+                    </div>
+                    <div class="mb-4 mb-4-flex-content-block">
+                        <h6><i class="ti-angle-double-right"></i>  Share ideas In Group</h6> <a href ="{% url 'posts:create' %}" class="btn custom-btn-css  btn-lg btn-fill btn-warning"><span class="glyphicon glyphicon-ok-circle"></span>  YES Go AHEAD!</a>
+                    </div>
+                    <div class="mb-4 mb-4-flex-content-block">
+                        <h6><i class="ti-angle-double-right"></i>  Create Your Own Group</h6> <a href ="{% url 'groups:create' %}" class="custom-btn-css btn btn-lg btn-fill btn-warning"><span class="glyphicon glyphicon-ok-circle"></span>  YES Go AHEAD!</a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!--  Section Services End -->
+    
+
+{% endblock %}

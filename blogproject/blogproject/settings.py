@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog_app',
+    'groups',
+    'posts',
     'ckeditor',
 
 ]
@@ -143,7 +145,7 @@ STATICFILES_DIRS = [
 # MEDIA
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-LOGIN_URL =  '/blog_app/user_login'
+LOGIN_URL =  '/blog_app/login'
 
 CKEDITOR_CONFIGS = {
     'default': {

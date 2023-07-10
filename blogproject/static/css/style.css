@@ -1446,3 +1446,13 @@ h3.quote::before {
 .blog-item-icons a:hover {
   color: #ff0000; /* Change the hover color as desired */
 }
+
+
+.mb-4-flex-content-block{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.custom-btn-css {
+  padding: 0.6rem 1rem !important;
+}

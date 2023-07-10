@@ -69,9 +69,13 @@
                 
                 {% if user.is_authenticated %}
                 <li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="{% url 'index' %}" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Blogs</a>
+					<a class="nav-link dropdown-toggle" href="{% url 'index' %}" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hey {{ user.username }}!</a>
 					<ul class="dropdown-menu" aria-labelledby="dropdown05">
-						<li><a class="dropdown-item" href="{% url 'blog_app:create' %}">Want to create Blogs?</a></li>
+						<li><a class="dropdown-item" href="{% url 'blog_app:create' %}">Want to create Blogs? </a></li>
+                        <li><a class="dropdown-item" href="{% url 'groups:create' %}">Want to create Groups? </a></li>
+                        <li><a class="dropdown-item" href="{% url 'groups:groups' %}">Want to explore Groups? </a></li>
+                        <li><a class="dropdown-item" href="{% url 'posts:create' %}">Want to share post in group? </a></li>
+                        
 					</ul>
 			  </li>
                 <li class="nav-item"><a class="nav-link" href="{% url 'blog_app:profile' %}">My Profile</a></li>
@@ -80,6 +84,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="{% url 'index' %}" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hey {{ user.username }}!</a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown05">
+                        <li><a class="dropdown-item" href="/blog_app">Want to explore our Blogs</a></li> 
+                        <li><a class="dropdown-item" href="{% url 'groups:groups' %}">Want to explore Groups? </a></li>                        
+					</ul>
+			  </li>
                 {% endif %}
                 </ul>
                 {% if not user.is_authenticated %}

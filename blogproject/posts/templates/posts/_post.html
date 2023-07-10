@@ -1,0 +1,21 @@
+<div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 25px;">
+	<div class="service-item mb-5">
+		<i class="ti-bookmark" style="color: #d54c23; opacity:2"></i>
+		<h6 class="mb-3">{{ post.message_html|safe }} </h6>
+		<p>
+			{% if user.is_authenticated and post.user == user and not hide_delete %}
+			<a href="#" data-id="{{ post.pk }}" data-csrf="{{ csrf_token }}"title="delete" class="btn btn-simple delete-grp-post">
+				<span class="glyphicon glyphicon-remove text-danger" aria-hidden="true"></span>
+				<span class="text-danger icon-label">Delete</span>
+			</a>
+			{% endif %}
+		</p>
+		<p class="media-heading" style="float: right;">
+			<span class="username"><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></span>
+			 <time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time>
+			{% if post.group %}
+			<span class="group-name">in <a href="{% url 'groups:single' slug=post.group.slug %}"><b>{{ post.group.name }}</b></a></span>
+			{% endif %}
+		</p>
+	</div>
+</div>

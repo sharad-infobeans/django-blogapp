@@ -1,0 +1,52 @@
+{% extends "posts/post_base.html" %}
+
+{% block group_post_content %}
+<div class="col-md-8">
+
+</div>
+
+
+<section class="section service border-top">
+    <div class="container">
+        <!-- form message -->
+        <div class="row">
+            <div class="col-12">
+                <div class="alert alert-success contact__msg" {% if not messages %} style="display:none" {% endif %} role="alert">
+                    {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- end message -->
+        <div class="row justify-content-center">
+            <div class="col-lg-8" style="border-right: 2px solid #d5253794;">
+				{% for post in post_list %}
+				{% include "posts/_post.html" %}
+				{% endfor %}
+            </div>
+            <div class="col-lg-4">
+
+
+                <div class="mb-3"> <h5>Your Joined Groups </h5></div>
+                {% for group in allgroups %}
+                <div class="mb-4">
+                    <h6><i class="ti-angle-double-right"></i>  {{ group.name }}</h6>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+
+</script>
+{% endblock %}
+

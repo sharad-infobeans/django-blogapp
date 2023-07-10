@@ -15,16 +15,20 @@ Including another URLconf
 """
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
-from django.conf.urls import include
-from blog_app import views
+from django.urls import path, include
+from blog_app import views as bviews
 from django.conf.urls.static import static
+from groups import views as gviews
+from posts import views as pviews
+
 
 urlpatterns = [
-    path('',views.BlogListView.as_view(),name='index'),
+    path('',bviews.BlogListView.as_view(),name='index'),
     #path('',views.BlogListView.as_view(),name='index'),
     path('admin/', admin.site.urls),
     path('blog_app/',include('blog_app.urls',namespace='blog_app')),
-    path('logout/',views.user_logout,name='logout'),
-    path('special/',views.special, name='special')
+    path('groups/',include('groups.urls',namespace='groups')),
+    path('posts/',include('posts.urls',namespace='posts')),
+    path('logout/',bviews.user_logout,name='logout'),
+    path('special/',bviews.special, name='special')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
