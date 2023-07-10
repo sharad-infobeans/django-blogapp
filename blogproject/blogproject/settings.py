@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-map_=4kb2x*+^^#%)o^g-jjjaw8c144v4_!47dhq^b0_r_41go
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS =['sharadgupta.pythonanywhere.com']    # keep empty if you are local
 
 
 # Application definition
